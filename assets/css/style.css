@@ -1,0 +1,46 @@
+
+@import url('https://fonts.googleapis.com/css?family=Anton');
+
+body{
+	text-align: center;
+}
+
+h1, h2, h3{
+	font-family: 'Anton', sans-serif;
+	font-weight: bold;
+}
+h1, h2{
+	text-transform: uppercase;
+	color: white;
+	text-shadow: 0 0 3px black;
+}
+h1{
+	font-size: 4.236em;
+}
+h2{
+	font-size: 2.618em;
+}
+h3{
+	font-size: 1.618em;
+}
+
+
+.clearfix:before,
+.clearfix:after{
+	display: table;
+	content: '';
+	clear: both;
+}
+
+.page-header{
+	margin: 2em 0;
+}
+.game{
+	margin-top: 2em;
+}
+
+
+#gameboard{
+	border: 1px solid black;
+	margin: 2em auto;
+}

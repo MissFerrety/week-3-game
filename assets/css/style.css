@@ -3,10 +3,10 @@
 
 body{
 	text-align: center;
+	font-family: 'Anton', sans-serif;
 }
 
 h1, h2, h3{
-	font-family: 'Anton', sans-serif;
 	font-weight: bold;
 }
 h1, h2{
@@ -23,7 +23,9 @@ h2{
 h3{
 	font-size: 1.618em;
 }
-
+strong{
+	font-weight: bold;
+}
 
 .clearfix:before,
 .clearfix:after{

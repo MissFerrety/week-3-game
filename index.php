@@ -13,7 +13,8 @@
 	</div>
 
 	<div class="game">
-		<h3 id="instruction">Press any key to start!</h3>
+		<h3 id="instructions">Press any key to start!</h3>
+		<div id="guessing"></div>
 		<canvas id="gameboard" width="300" height="300">
 		</canvas>
 		<div>

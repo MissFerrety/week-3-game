@@ -60,9 +60,17 @@ var hangman = {
 			hangman.gameStarted = true;
 			// Replace the instructions
 			document.getElementById('instructions').innerHTML = 'Enter a letter to guess';
+
+			// Standardize dictionary
+			toUpper = function(x){ 
+				return x.toUpperCase();
+			};
+			hangman.dictionary.map(toUpper);
+
 			// Add blanks
 			numAnswers = hangman.dictionary.length;
-			hangman.answer = hangman.dictionary[Math.floor(Math.random()*numAnswers)];
+			//hangman.answer = hangman.dictionary[Math.floor(Math.random()*numAnswers)];
+			hangman.answer = "ABABCCD";
 
 			hangman.guess = hangman.answer.replace(/[A-Z]/g,'_');
 			document.getElementById('guessing').innerHTML = hangman.guess;
@@ -104,9 +112,23 @@ var hangman = {
 		}
 	},
 
-	guessedRight: function(letter) {
+	guessedRight: function(letter){
 		// Replace letters
+		for(i=0;i<hangman.answer.length;i++){
+			// Find index of letter
+			if(letter === hangman.answer.charAt(i)){
+				// Replace every instance
+				hangman.guess = hangman.guess.substr(0,i)+letter+hangman.guess.substr(i+1);
+			}
+		}
+		// Add new guess string to answer box
+		document.getElementById('guessing').innerHTML = hangman.guess;
+
 		// Check if game won
+		if(hangman.guess.indexOf('_') === -1){
+			alert('YOU WON!');
+			var play = confirm('Play again?');
+		}
 	},
 
 	drawLine: function(oX,oY,nX,nY){

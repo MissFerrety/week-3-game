@@ -14,7 +14,7 @@ var hangman = {
 		'GANGNAM STYLE',
 		'DEAL WITH IT',
 		'ME GUSTA',
-		'HONEY BADGER',
+		'HONEY BADGER DON\'T CARE',
 		'OVER NINE THOUSAND',
 		'ITS A TRAP',
 		'ONE DOES NOT SIMPLY',
@@ -41,28 +41,72 @@ var hangman = {
 	winStreak: 0,
 	loseStreak: 0,
 	answer: '',
+	guess: '',
 	step: 0,
 
-	checkEntry: function(key){
+	checkGame: function(key){
 		// If game is started, check the letter
 		// If game is not started, start the game
-		if(this.gameStarted === true){
+		if(hangman.gameStarted === true){
 			// Check letter
 			if(key.keyCode >= 65 && key.keyCode <= 90){
 				// It's a letter!
+				hangman.checkEntry(key.key);
 			}else{
 				// Not a letter!
 			}
 		}else{
 			// Start the game
-			this.gameStarted = true;
+			hangman.gameStarted = true;
 			// Replace the instructions
 			document.getElementById('instructions').innerHTML = 'Enter a letter to guess';
 			// Add blanks
-			this.answer = this.dictionary[Math.floor(Math.random()*this.dictionary.length)];
-			document.getElementById('guessing').innerHTML = '___ __';
+			numAnswers = hangman.dictionary.length;
+			hangman.answer = hangman.dictionary[Math.floor(Math.random()*numAnswers)];
 
+			hangman.guess = hangman.answer.replace(/[A-Z]/g,'_');
+			document.getElementById('guessing').innerHTML = hangman.guess;
+
+			// Draw the gallows
+			hangman.drawGallows();
 		}
+	},
+
+	checkEntry: function(letter){
+		letter = letter.toUpperCase();
+		if(hangman.letters.indexOf(letter) === -1){
+			// Not guessed before; add to guesses
+			hangman.letters.push(letter);
+			document.getElementById('guessed').innerHTML = hangman.letters;
+
+			if(hangman.answer.indexOf(letter) === -1){
+				// Not in answer
+				hangman.guessedWrong(letter);
+			}else{
+				// In answer; replace as necessary
+				hangman.guessedRight(letter);
+			}
+		}else{
+			// Guessed before
+			alert('You already guessed that letter! Try again.')
+		}
+	},
+
+	guessedWrong: function(letter) {
+		hangman.step++;
+		if(hangman.step < 8){
+			// Still have steps to go
+			hangman.drawStickman(hangman.step);
+		}else if(hangman.step === 8){
+			// Run the Hail Mary play!
+		}else{
+			// Game over, man.
+		}
+	},
+
+	guessedRight: function(letter) {
+		// Replace letters
+		// Check if game won
 	},
 
 	drawLine: function(oX,oY,nX,nY){
@@ -79,10 +123,10 @@ var hangman = {
 
 	drawGallows: function(){
 		// Gallows
-		drawLine(10,280,290,280);
-		drawLine(30,280,30,30);
-		drawLine(30,30,170,30);
-		drawLine(170,30,170,60);
+		this.drawLine(10,280,290,280);
+		this.drawLine(30,280,30,30);
+		this.drawLine(30,30,170,30);
+		this.drawLine(170,30,170,60);
 	},
 
 	drawStickman: function(step){
@@ -131,6 +175,4 @@ var hangman = {
 	}
 
 }
-	console.log(hangman.dictionary);
-
-window.addEventListener('keyup', hangman.checkEntry);
+window.addEventListener('keyup', hangman.checkGame);

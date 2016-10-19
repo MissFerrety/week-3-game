@@ -12,7 +12,11 @@ h1, h2, h3{
 h1, h2{
 	text-transform: uppercase;
 	color: white;
-	text-shadow: 0 0 3px black;
+	text-shadow:
+	   -2px -2px 0 #000,
+	    2px -2px 0 #000,
+	   -2px  2px 0 #000,
+	    2px  2px 0 #000;
 }
 h1{
 	font-size: 4.236em;

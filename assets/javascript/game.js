@@ -37,12 +37,17 @@ var hangman = {
 
 	letters: [],
 
-	score: 0,
+	wins: 0,
+	losses: 0,
 	winStreak: 0,
 	loseStreak: 0,
 	answer: '',
 	guess: '',
 	step: 0,
+	newGame: document.getElementById('game').innerHTML,
+	winImg: '<img src="assets/images/awinnerisyou.jpg" />',
+	loseImg: '<img src="assets/images/youlose.jpg" />',
+
 
 	checkGame: function(key){
 		// If game is started, check the letter
@@ -60,7 +65,7 @@ var hangman = {
 			hangman.gameStarted = true;
 			// Replace the instructions
 			document.getElementById('instructions').innerHTML = 'Enter a letter to guess';
-
+			document.getElementById('result').innerHTML = '';
 			// Standardize dictionary
 			toUpper = function(x){ 
 				return x.toUpperCase();
@@ -105,10 +110,11 @@ var hangman = {
 		if(hangman.step < 8){
 			// Still have steps to go
 			hangman.drawStickman(hangman.step);
-		}else if(hangman.step === 8){
+//		}else if(hangman.step === 8){
 			// Run the Hail Mary play!
 		}else{
 			// Game over, man.
+			hangman.endGame('lose');
 		}
 	},
 
@@ -126,9 +132,37 @@ var hangman = {
 
 		// Check if game won
 		if(hangman.guess.indexOf('_') === -1){
-			alert('YOU WON!');
-			var play = confirm('Play again?');
+			hangman.endGame('win');
 		}
+	},
+
+	endGame: function(point){
+		window.removeEventListener('keyup', hangman.checkGame);
+
+		if('win'===point){
+			hangman.loseStreak = 0;
+			hangman.wins++;
+			hangman.winStreak++;
+			document.getElementById('result').innerHTML = hangman.winImg;
+			if(hangman.winStreak===3){
+				// Run the win super
+			}
+		}
+		if('lose'===point){
+			hangman.winStreak = 0;
+			hangman.losses++;
+			hangman.loseStreak++;
+			document.getElementById('result').innerHTML = hangman.loseImg;
+			if(hangman.loseStreak===3){
+				// Run the lose super
+			}
+		}
+	},
+
+	newGame: function(){
+		document.getElementById('game').innerHTML = hangman.newGame;
+		window.addEventListener('keyup', hangman.checkGame);
+		hangman.checkEntry();
 	},
 
 	drawLine: function(oX,oY,nX,nY){

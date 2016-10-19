@@ -27,6 +27,7 @@ strong{
 	font-weight: bold;
 }
 
+
 .clearfix:before,
 .clearfix:after{
 	display: table;
@@ -40,6 +41,28 @@ strong{
 .game{
 	margin-top: 2em;
 }
+.correct{
+	color: limegreen;
+}
+.wrong{
+	color: red;
+}
+
+
+#result{
+	display: none;
+}
+#resultimg img{
+	height: 300px;
+}
+#restart{
+	background: white;
+	border: 3px solid black;
+	padding: 10px;
+	margin: 40px auto 20px;
+	font-size: 1.8em;
+	cursor: pointer;
+}
 
 
 #instructions{
@@ -48,6 +71,9 @@ strong{
 #guessing{
 	letter-spacing: 2px;
 	font-size: 1.8em;
+}
+#guessed{
+	letter-spacing: 5px;
 }
 
 #gameboard{

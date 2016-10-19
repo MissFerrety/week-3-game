@@ -14,8 +14,8 @@ $(function(){
 			'DEAL WITH IT',
 			'ME GUSTA',
 			'HONEY BADGER DON\'T CARE',
-			'OVER NINE THOUSAND',
-			'ITS A TRAP',
+			'IT\'S OVER NINE THOUSAND',
+			'IT\'S A TRAP',
 			'ONE DOES NOT SIMPLY',
 		],
 

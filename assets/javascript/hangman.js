@@ -42,6 +42,7 @@ $(function(){
 		loseStreak: 0,
 		answer: '',
 		guess: '',
+		guesses: 7,
 		step: 0,
 		newGame: $('#game').html(),
 		winImg: '<img src="assets/images/awinnerisyou.jpg" />',
@@ -80,10 +81,9 @@ $(function(){
 				// Add blanks
 				numAnswers = hangman.dictionary.length;
 				hangman.answer = hangman.dictionary[Math.floor(Math.random()*numAnswers)];
-				//hangman.answer = "ABABCCD";
-
 				hangman.guess = hangman.answer.replace(/[A-Z]/g,'_');
 				$('#guessing').html(hangman.guess);
+				$('#guessnum').html(hangman.guesses);
 
 				// Draw the gallows
 				hangman.drawGallows();
@@ -112,13 +112,15 @@ $(function(){
 
 		guessedWrong: function(letter) {
 			hangman.step++;
-			if(hangman.step < 7){
+			$('#guessnum').html(hangman.guesses - hangman.step);
+			if(hangman.step < hangman.guesses){
 				// Still have steps to go
 				hangman.drawStickman(hangman.step);
-	//		}else if(hangman.step === 8){
+	//		}else if(hangman.step === hangman.guesses){
 				// Run the Hail Mary play!
 			}else{
 				// Game over, man.
+				hangman.drawStickman(hangman.step);
 				hangman.endGame('lose');
 			}
 		},

@@ -19,6 +19,7 @@
 	<div id="game">
 		<h3 id="instructions">Press any key to start!</h3>
 		<div id="guessing"></div>
+		<div id="guesses">Guesses: <span id="guessnum"></span></div>
 		<canvas id="gameboard" width="300" height="300">
 		</canvas>
 		<div>

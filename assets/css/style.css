@@ -76,6 +76,9 @@ strong{
 	letter-spacing: 2px;
 	font-size: 1.8em;
 }
+#guesses{
+	margin: 20px 0 10px;
+}
 #guessed{
 	letter-spacing: 5px;
 }
